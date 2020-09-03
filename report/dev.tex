@@ -1,0 +1,31 @@
+\section{Development Environment}
+\subsection{Introduction to the Development Environment}
+\begin{tabular}{c|c}
+\hline
+Hardware system & PC, 1G graphics card\\
+ & Intel i3 CPU, 4G physical memory\\
+\hline
+Software System & Windows 7 Operating System \\
+
+& Myeclipse 10.0\\
+& Tomcat 7.0 server\\
+\hline
+Database Software & MySQL, MySQL workbench\\
+\hline
+\end{tabular}
+\subsection{Introduction to Development Tools}
+
+Myeclipse10.0 is a mainstream development tool for Web applications. It adds a lot of Web-related components based on eclipse. For example, it integrates some kinds of mainstream frameworks such as Spring, Struts. Also other mainstream servers such as Tomcat and JBoss can also be well supported. It also integrates maven, which is widely used project management tool. It provides a large number of plug-ins. Through these plug-ins, Myeclipse can perfectly support the development of web projects such as JSP and Servlet as well as various complicated interface designs and rapid implementation of various functions. 
+
+At the same time, it also integrates three major frameworks and can be quickly implemented. By using these plug-ins, our coding tasks will be quite simple and the design of the interface will take us less time. By using Myeclipse, the efficiency of project development and the reliability of program operation have been significantly improved.
+
+MySQL workbench is a graphical management tool of MySQL database from Webyog company. The software is simple and easy to use. At the same time, the interface is concise. So the code operation in the CMD command window can be operated through a visual window in the software, such as building a table, inserting Data, modify the table structure and other operations can be quickly completed by using the software. At the same time, the backup and restore of the database and the batch operation of the SQL script also can be quickly completed with the software.
+There’re usually three ways for a JSP system to access the database:
+\begin{enumerate}
+    \item Access the database by using the basic JDBC API
+    \item Use the data access variables provided by JSP to access the database;
+    \item Access ODBC API functions by using the interface provided by ODBC.
+\end{enumerate}
+
+There are three main data access APIs: data access objects, remote data objects, and ActiveX data objects. We mainly used JDBC way to access the database in our system.
+Similar to the role of the filter in other applications, the main function of the filter in JAVAWEB is to intercept all user requests and then perform related filtering operations. The most commonly used functions are character set filters and permissions. check.

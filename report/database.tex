@@ -1,0 +1,215 @@
+\section{Database Design}
+\subsection{Introduction of Database}
+
+The definition of a database: A database generally refers to the consolidation of a large amount of organized and simultaneously sharable data stored on a computer for a long time.
+The basic characteristics of the database:
+\begin{enumerate}
+    \item Data is usually organized and stored according to a certain model.
+    \item The database can be shared by various users and multiple applications.
+    \item Little redundancy between data.
+    \item The independence between data is high.
+    \item easy to expand.
+\end{enumerate}
+\subsection{Requirement Analysis}
+
+According to the investigation of the actual situation of the patients and physicians in the relevant hospitals, the four most important roles in the medical record management system are summarized:
+\begin{itemize}
+    \item Administrator: the main responsibility is to manage all users.
+    \item Receptionist: It is mainly responsible for receiving patients at the front desk, registering patients, and handling prescription-related matters, including price allocation, payment, and medication.
+    \item Doctor: It is mainly responsible for giving patients medical treatment, filling out medical records, and prescribing prescriptions
+    \item Warehouse keeper: Mainly responsible for some of the drug management, including drug information collection, drug storage, drug sales.
+
+\end{itemize}
+\begin{enumerate}
+    \item 
+    
+In the system user table, there are mainly four types of users in this system.
+\begin{itemize}
+    \item System administrator: Its main function is to manage all other user's information, but also includes adding users, viewing all information of other users, and modifying their own relevant information. 
+    \item Receptionist: Can help patients to register, manage prescriptions, modify their own relevant information.
+    \item Doctor: Can fill in the case and prescribe the patient, modify their own relevant information
+    \item Warehouse keeper: Relevant information for the management of drugs in warehouses, including additions and deletions of drugs, inventory of drugs, inventory of drugs, and modification of their own relevant information.
+\end{itemize}
+
+Based on the above analysis, we get the table structure of the table as shown in Table \ref{fig:t1}.
+\begin{figure}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+     name & type & length & Primary key & meaning  \\
+    \hline
+     id	& int &	11 &primary key & User id \\
+    \hline 
+	uname & varchar2 & 255 & & username \\
+	\hline
+    upass & varchar2 & 255 &  & password \\
+    \hline
+    Utype & varchar2 & 255 &  & User type\\
+    \hline
+    tname & varchar2 & 255 &  & 	User real name\\
+    \hline
+    Sex & varchar2 & 255 &  & 	Gender\\
+    \hline
+    Age & varchar2 & 255 &  & 	age\\
+    \hline
+    Tel & varchar2 & 255 &  & 	tel\\
+    \hline
+    addrs & varchar2 & 255 &  & 	address \\
+    \hline
+    Filename & varchar2 & 255 &  & 	photo\\			
+    \hline
+
+\end{tabular}
+    \caption{System user table}
+    \label{fig:t1}
+\end{figure}
+
+
+\item 
+The inventory table manages all drug information, including the time of the drug's storage, the storage data, the storage batch, and the total price. This table is mainly performed by the warehouse keeper for related additions, deletions, modifications, and query operations. Other users do not have the right to manage inventory information, as shown in Table \ref{fig:t2}.
+\begin{figure}[!h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+name & type & length & Primary key & meaning \\
+\hline
+id & int & 11 & Primary key & Inventory id\\
+\hline
+name & varchar2 & 255 & & 	    Medicine name\\
+\hline
+rkdate & varchar2 & 255	 &  & nventory data\\
+\hline
+tnum & varchar2 & 255 &  & quantity\\
+\hline
+batch & varchar2 & 255 &  & batch\\
+\hline
+totprice & varchar2 & 255 &  & Total price\\
+\hline
+\end{tabular}   
+\caption{Warehouse table}
+    \label{fig:t2}
+\end{figure}
+
+\item The health history table contains the main relevant information of the medical record, such as ID, medical record number, relevant patient ID number, etc., which are mainly related to the doctor to add, delete, modify, query operations. The table structure is shown in Table \ref{fig:t3}.
+\begin{figure}
+    \centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+name & type & length & Primary key & meaning \\
+\hline
+id & int & 11 & Primary key & Health history id\\
+\hline
+blno & varchar2 & 255 &  & Health history number\\
+\hline
+pname & varchar2 & 255 &  & Patient name\\
+\hline
+ssn & varchar2 & 255 &  & Social Security Number\\
+\hline
+Sex & varchar2 & 255 & & 	Sex\\
+\hline
+birth & varchar2 & 255 &  & Birth date\\
+\hline
+sym & varchar2 & 255 &  &	Symptom\\
+\hline
+\end{tabular}   
+\caption{Warehouse table}
+    \label{fig:t3}
+\end{figure}
+\item A charge table, which manages all charge information, including the medical record number, drug information, total price, and related status of the charge amount. The table is mainly related to the window personnel to increase, modify, query operations, other people can not perform related operations on the table, the table structure shown in Table \ref{fig:t4}.
+\begin{figure}
+    \centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+name & type & length & Primary key & meaning \\
+\hline
+id & int & 11 & Primary key & charge id\\
+\hline
+blno & varchar2 & 255 &  & Health history number\\
+\hline
+mname & varchar2 & 255 &  & Medicine name\\
+\hline
+totprice & varchar2 & 255 &  & Total price\\
+\hline
+status & varchar2 & 255 & & 	status\\
+\hline
+
+\end{tabular}   
+\caption{charge table}
+    \label{fig:t4}
+\end{figure}
+\item Medicine table, with the continuous increase of drugs, electronic information management has become very necessary. The drug table manages all relevant information of drugs, including drug names, drug manufacturers, drugs to adapt to symptoms, and drug related taboos. , the unit price of drugs and the price of medical insurance, as well as some other information. This form is filled in by the library manager. Other personnel cannot change the relevant information of the table. The table structure is shown in Table \ref{fig:t5}.
+\begin{figure}
+    \centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+name & type & length & Primary key & meaning \\
+\hline
+id & int & 11 & Primary key & Medicine id\\
+\hline
+mname & varchar2 & 255 &  & Medicine name\\
+\hline
+factory & varchar2 & 255 &  & Medicine factory\\
+\hline
+sym & varchar2 & 255 &  &	Symptom\\
+\hline
+se & varchar2 & 255 &  &	Side effect\\
+\hline
+price & varchar2 & 255 &  & Unit price\\
+\hline
+member & varchar2 & 255 &  & Member or not\\
+\hline
+mbprice & varchar2 & 255 &  & Member price\\
+\hline
+com & varchar2 & 255 &  &	comment\\
+\hline
+Filename & varchar2 & 255 &  &	picture\\
+\hline
+\end{tabular}   
+\caption{Medicine  table}
+    \label{fig:t5}
+\end{figure}
+\item Prescribe information table manages the medication information that the doctor prescribes to the patient, including the relevant medical record number, drug information, and related status.  The table is managed by a doctor. Other users do not have the right to modify the relevant information of the table. The table structure is shown in Table \ref{fig:t6}.
+\begin{figure}
+    \centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+name & type & length & Primary key & meaning \\
+\hline
+id & int & 11 & Primary key & Medicine id\\
+\hline
+blno & varchar2 & 255 &  & Health history number\\
+\hline
+med & varchar2 & 255 &  & Medicine name\\
+\hline
+num & varchar2 & 255 &  & quantity\\
+\hline
+status & varchar2 & 255 &  & status\\
+\hline
+\end{tabular}   
+\caption{Prescribe information table}
+    \label{fig:t6}
+\end{figure}
+\item log table, in any management system, log information is an important part of the system, this system is no exception. In this system, the log information records the user's related operations, such as login, exit information, the doctor's increase in medical records, modify operations, etc. It is of great significance to the related operation and maintenance in the future. The log system is automatically created by the system when the user performs the related operations. At the same time, only the system administrator can log the system and view related log information. Based on the above analysis, The table structure of this table is shown in Table \ref{fig:t7}.
+\begin{figure}
+    \centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+name & type & length & Primary key & meaning \\
+\hline
+id & int & 11 & Primary key & Log id\\
+\hline
+userid	& int &	11 & & User id \\
+\hline 
+Uname & varchar2 & 255 & & username \\
+\hline
+blno & varchar2 & 255 &  & Health history number\\
+\hline
+Createtime & varchar2 & 255 &  & Operation time\\
+\hline
+ssn & varchar2 & 255 &  & user ssn\\
+\hline
+\end{tabular}   
+\caption{log table}
+    \label{fig:t7}
+\end{figure}
+\end{enumerate}				
